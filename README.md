@@ -1,10 +1,11 @@
 # Mount and copy the dataset
+(Create a shortcut for the dataset shared , and update in Colab Notebook Drive.)
 ```
 from google.colab import drive
 drive.mount('/content/drive',force_remount=True)
 
-# CORRECT PATH: Only ONE "BRaiN"
-!cp -r "/content/drive/MyDrive/Colab Notebooks/Combined Dataset/train" /content/
+#set the path correctly or it could throw errors
+!cp -r "/content/drive/MyDrive/Colab Notebooks/Combined Dataset/train" /content/ 
 !cp -r "/content/drive/MyDrive/Colab Notebooks/Combined Dataset/test" /content/
 
 print("Data copied to Colab!")
