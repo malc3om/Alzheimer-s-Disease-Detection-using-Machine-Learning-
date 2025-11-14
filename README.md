@@ -1,11 +1,14 @@
 # Mount and copy the dataset
 ```
 from google.colab import drive
-drive.mount('/content/drive', force_remount=True)
+drive.mount('/content/drive',force_remount=True)
 
-!cp -r "/content/drive/MyDrive/BRaiN/Combined Dataset/train" /content/
-!cp -r "/content/drive/MyDrive/BRaiN/Combined Dataset/test" /content/
-print("Data copied!")
+# CORRECT PATH: Only ONE "BRaiN"
+!cp -r "/content/drive/MyDrive/Colab Notebooks/Combined Dataset/train" /content/
+!cp -r "/content/drive/MyDrive/Colab Notebooks/Combined Dataset/test" /content/
+
+print("Data copied to Colab!")
+!ls /content/train | head -5
 ```
 
 # Defines a custom PyTorch Dataset class (MRIDataset) used to load MRI images for training and testing the EfficientNet model.
