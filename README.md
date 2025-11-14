@@ -82,6 +82,32 @@ model = model.to(device)
 fine-tuning
  print("EfficientNet-B0 loaded! Ready for training.")
 ```
+# Training model
+```
+print("\nSTARTING TRAINING (EfficientNet-B0 - 5 EPOCHS)...")
+for epoch in range(5):
+    model.train()
+    running_loss = 0.0
+    for i, (x, y) in enumerate(train_loader):
+        x, y = x.to(device), y.to(device)
+        optimizer.zero_grad()
+        out = model(x)
+        loss = criterion(out, y)
+        loss.backward()
+        optimizer.step()
+        running_loss += loss.item()
+
+        if i % 100 == 0:
+            print(f"  [Epoch {epoch+1}] Step {i}: Loss = {loss.item():.4f}")
+
+    avg_loss = running_loss / len(train_loader)
+    print(f"\nEpoch {epoch+1} → Avg Loss: {avg_loss:.4f}")
+
+print("\nTRAINING COMPLETE!")
+
+```
+<img width="339" height="445" alt="image" src="https://github.com/user-attachments/assets/4947c79c-8e6f-4e02-8959-e7a559cab9b1" />
+
 # Evaluates the trained EfficientNet-B0 model on the test dataset and calculates final accuracy
 ```
  model.eval()
@@ -94,7 +120,7 @@ fine-tuning
         correct += (pred == y).sum().item()
         total += y.size(0)
  accuracy = 100 * correct / total
- print(f"\n🎉 FINAL ACCURACY: {accuracy:.2f}%")
+ print(f"\n FINAL ACCURACY: {accuracy:.2f}%")
  print(f"Correct: {correct} / {total}"
 ```
 # (Optional, but recomended for easiness)
@@ -103,7 +129,7 @@ torch.save(model.state_dict(), '/content/efficientnet_b0_final.pth')
  !mkdir -p "/content/drive/MyDrive/Alzheimer_MVP"
  !cp /content/efficientnet_b0_final.pth 
 "/content/drive/MyDrive/Alzheimer_MVP/"
- print("🎉 MODEL SAVED PERMANENTLY!")
+ print(" MODEL SAVED PERMANENTLY!")
 ```
 # Creates a Streamlit web app to run your trained "EfficientNet-B0" Model,
 and then uses Ngrok to host the app online so you get a public link.
@@ -133,7 +159,7 @@ map_location='cpu'))
  ])
  classes = ['Mild Impairment', 'Moderate Impairment', 'No Impairment', 
 'Very Mild Impairment']
- st.title("🎉 Alzheimer MRI AI")
+ st.title(" Alzheimer MRI AI")
  st.markdown("**EfficientNet-B0 • 98%+ Accuracy • 5.3M params**")
  uploaded = st.file_uploader("Upload MRI", type=['jpg', 'jpeg', 'png'])
  if uploaded:
