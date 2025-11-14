@@ -1,4 +1,5 @@
-# Alzheimer-s-Disease-Detection-using-Machine-Learning
+# Mount and copy the dataset
+```
 from google.colab import drive
 drive.mount('/content/drive', force_remount=True)
 
